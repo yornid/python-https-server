@@ -2,8 +2,10 @@ import os
 import sys
 import http.server, ssl
 
+#userPath =  os.path.expanduser("~/Documents/python-https-server")
+userPath = os.path.dirname(os.path.realpath(__file__))
 host = 'localhost'
-userPath =  os.path.expanduser("~/Documents/python-https-server")
+
 keyFile = userPath + "/key.pem"
 certFile = userPath + "/server.pem"
 
