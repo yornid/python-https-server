@@ -14,8 +14,11 @@ for x in sys.argv:
   if (item[0] == 'ip'):
     host = item[1]
 
+Handler = http.server.SimpleHTTPRequestHandler
+Handler.extensions_map['.wasm'] = 'application/wasm'
 server_address = (host, 4443)
-httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
+
+httpd = http.server.HTTPServer(server_address, Handler)
 httpd.socket = ssl.wrap_socket(httpd.socket,
                                keyfile=keyFile,
                                certfile=certFile,
