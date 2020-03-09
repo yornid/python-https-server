@@ -5,6 +5,7 @@ import http.server, ssl
 #userPath =  os.path.expanduser("~/Documents/python-https-server")
 userPath = os.path.dirname(os.path.realpath(__file__))
 host = 'localhost'
+port = 4443
 
 keyFile = userPath + "/key.pem"
 certFile = userPath + "/server.pem"
@@ -16,7 +17,7 @@ for x in sys.argv:
 
 Handler = http.server.SimpleHTTPRequestHandler
 Handler.extensions_map['.wasm'] = 'application/wasm'
-server_address = (host, 4443)
+server_address = (host, port)
 
 httpd = http.server.HTTPServer(server_address, Handler)
 httpd.socket = ssl.wrap_socket(httpd.socket,
@@ -24,4 +25,5 @@ httpd.socket = ssl.wrap_socket(httpd.socket,
                                certfile=certFile,
                                server_side=True,
                                ssl_version=ssl.PROTOCOL_TLSv1)
+print('server running at port ' + str(port))
 httpd.serve_forever()
