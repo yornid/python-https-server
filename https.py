@@ -4,7 +4,7 @@ import http.server, ssl
 
 #userPath =  os.path.expanduser("~/Documents/python-https-server")
 userPath = os.path.dirname(os.path.realpath(__file__))
-host = 'localhost'
+host = '10.116.105.93'
 port = 4443
 
 keyFile = userPath + "/key.pem"
@@ -25,5 +25,5 @@ httpd.socket = ssl.wrap_socket(httpd.socket,
                                certfile=certFile,
                                server_side=True,
                                ssl_version=ssl.PROTOCOL_TLSv1)
-print('server running at port ' + str(port))
+print('server ' + host + ' running at port ' + str(port))
 httpd.serve_forever()
