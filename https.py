@@ -1,6 +1,11 @@
 import os
 import sys
+import signal
 import http.server, ssl
+
+def stopHandler(sig, frame):
+  print("\nYou have stopped the python http server.")
+  sys.exit(0)
 
 host = 'localhost'
 port = None
@@ -24,6 +29,8 @@ if port is None:
     port = 4443
   else:
     port = 8080
+
+signal.signal(signal.SIGINT, stopHandler)
 
 Handler = http.server.SimpleHTTPRequestHandler
 Handler.extensions_map['.wasm'] = 'application/wasm'
